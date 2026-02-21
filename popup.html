@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Bookmarks Organizer</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <main class="app" aria-live="polite">
+    <header class="toolbar">
+      <h1>Smart Bookmarks Organizer</h1>
+      <div class="toolbar-actions">
+        <button id="addCurrentBtn" aria-label="Bookmark current tab">Add Current</button>
+        <button id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+      </div>
+    </header>
+
+    <section class="controls">
+      <input id="searchInput" type="search" placeholder="Search bookmarks, tags, notes..." aria-label="Search bookmarks" />
+      <div class="button-row">
+        <button id="exportBtn">Export</button>
+        <label for="importInput" class="button-like">Import</label>
+        <input id="importInput" type="file" accept="application/json" hidden />
+        <button id="deleteSelectedBtn">Delete Selected</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Analytics</h2>
+      <div id="analytics" class="analytics"></div>
+    </section>
+
+    <section>
+      <h2>Categories (drag headers to reorder)</h2>
+      <div id="board" class="board" aria-label="Bookmark categories board"></div>
+    </section>
+  </main>
+
+  <template id="bookmarkCardTemplate">
+    <article class="card" draggable="true">
+      <label class="check-wrap">
+        <input type="checkbox" class="bulk-check" aria-label="Select bookmark for bulk actions" />
+      </label>
+      <div class="card-main">
+        <a class="title" target="_blank" rel="noopener noreferrer"></a>
+        <p class="meta"></p>
+        <p class="notes"></p>
+        <div class="tags"></div>
+      </div>
+      <div class="card-actions">
+        <select class="category-select" aria-label="Move bookmark category"></select>
+        <button class="delete-btn" aria-label="Delete bookmark">Delete</button>
+      </div>
+    </article>
+  </template>
+
+  <script src="popup.js" type="module"></script>
+</body>
+</html>

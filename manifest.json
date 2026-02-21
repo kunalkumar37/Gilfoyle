@@ -1,0 +1,45 @@
+{
+  "manifest_version": 3,
+  "name": "Smart Bookmarks Organizer",
+  "description": "Privacy-first AI-powered bookmark organizer with automatic categorization and a clean category UI.",
+  "version": "1.0.0",
+  "permissions": [
+    "storage",
+    "bookmarks",
+    "tabs",
+    "activeTab",
+    "contextMenus"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "Smart Bookmarks Organizer",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "contentScript.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "commands": {
+    "quick-add-bookmark": {
+      "description": "Bookmark current page with smart categorization",
+      "suggested_key": {
+        "default": "Ctrl+Shift+B",
+        "mac": "Command+Shift+B"
+      }
+    }
+  },
+  "options_page": "popup.html"
+}
