@@ -1,0 +1,86 @@
+{
+  "name": "ai-suggestion-shield",
+  "displayName": "AI Suggestion Shield",
+  "description": "One shortcut to suppress inline AI ghost text and common AI coding assistant suggestions in VS Code.",
+  "version": "0.1.0",
+  "publisher": "gilfoyle",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:aiSuggestionShield.stopSuggestions",
+    "onCommand:aiSuggestionShield.restoreSuggestions",
+    "onCommand:aiSuggestionShield.toggleSuggestions",
+    "onStartupFinished"
+  ],
+  "main": "./src/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "aiSuggestionShield.stopSuggestions",
+        "title": "AI Suggestion Shield: Stop AI Suggestions",
+        "category": "AI Suggestion Shield",
+        "icon": "$(shield)"
+      },
+      {
+        "command": "aiSuggestionShield.restoreSuggestions",
+        "title": "AI Suggestion Shield: Restore AI Suggestions",
+        "category": "AI Suggestion Shield",
+        "icon": "$(debug-restart)"
+      },
+      {
+        "command": "aiSuggestionShield.toggleSuggestions",
+        "title": "AI Suggestion Shield: Toggle AI Suggestions",
+        "category": "AI Suggestion Shield",
+        "icon": "$(circle-slash)"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "aiSuggestionShield.stopSuggestions",
+        "key": "ctrl+alt+shift+a",
+        "mac": "cmd+alt+shift+a",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "aiSuggestionShield.toggleSuggestions",
+        "key": "ctrl+alt+shift+t",
+        "mac": "cmd+alt+shift+t",
+        "when": "editorTextFocus"
+      }
+    ],
+    "configuration": {
+      "title": "AI Suggestion Shield",
+      "properties": {
+        "aiSuggestionShield.autoStopOnStartup": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically stop inline and common AI assistant suggestions when VS Code starts."
+        },
+        "aiSuggestionShield.showStatusBar": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show a status bar control for toggling AI Suggestion Shield."
+        },
+        "aiSuggestionShield.targetScope": {
+          "type": "string",
+          "enum": [
+            "global",
+            "workspace"
+          ],
+          "default": "global",
+          "description": "Where AI Suggestion Shield writes suppression settings. Global affects all workspaces; workspace affects only the current workspace."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "test": "npm run test:syntax",
+    "test:syntax": "node --check src/extension.js && node --check scripts/run-vscode-tests.js && node --check test/suite/index.js",
+    "test:vscode": "node scripts/run-vscode-tests.js"
+  },
+  "devDependencies": {}
+}
